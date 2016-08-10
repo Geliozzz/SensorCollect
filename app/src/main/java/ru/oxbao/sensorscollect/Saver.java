@@ -19,11 +19,11 @@ public class Saver
 
     public void SaveData(TestData testData, boolean alternative)
     {
-        if (!alternative) m_storageOutput.SaveInFile(testData);
-        m_storageOutputAlternative.SaveInFile(testData, 'X');
-        m_storageOutputAlternative.SaveInFile(testData, 'Y');
-        m_storageOutputAlternative.SaveInFile(testData, 'Z');
-        m_storageOutputAlternative.SaveInFile(testData, 'T');
+            m_storageOutput.SaveInFile(testData);
+//        m_storageOutputAlternative.SaveInFile(testData, 'X');
+//        m_storageOutputAlternative.SaveInFile(testData, 'Y');
+//        m_storageOutputAlternative.SaveInFile(testData, 'Z');
+//        m_storageOutputAlternative.SaveInFile(testData, 'T');
     }
 
     public void SetPrefix(String prefix)

@@ -38,7 +38,31 @@ public class SensorInput implements SensorEventListener
         } else
         {
             m_ownerTestExecutor.ShowToast(TestExecutor.ToastMessage.failSaveData);
-            m_collectorOwner.Stop();
+            //m_collectorOwner.Stop();
+        }
+
+        Sensor gyro = m_sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+        if (gyro != null)
+        {
+            m_sensorManager.registerListener(this, gyro, SensorManager.SENSOR_DELAY_FASTEST);
+            m_ownerTestExecutor.ShowToast(TestExecutor.ToastMessage.failStartSensor);
+            m_sensorIsWorking = true;
+        } else
+        {
+            m_ownerTestExecutor.ShowToast(TestExecutor.ToastMessage.failSaveData);
+           // m_collectorOwner.Stop();
+        }
+
+        Sensor mag = m_sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+        if (mag != null)
+        {
+            m_sensorManager.registerListener(this, mag, SensorManager.SENSOR_DELAY_FASTEST);
+            m_ownerTestExecutor.ShowToast(TestExecutor.ToastMessage.failStartSensor);
+            m_sensorIsWorking = true;
+        } else
+        {
+            m_ownerTestExecutor.ShowToast(TestExecutor.ToastMessage.failSaveData);
+            // m_collectorOwner.Stop();
         }
     }
 
@@ -52,8 +76,10 @@ public class SensorInput implements SensorEventListener
     @Override
     public void onSensorChanged(SensorEvent sensorEvent)
     {
-        m_collectorOwner.Amass(sensorEvent.values[0], sensorEvent.values[1],
-                sensorEvent.values[2], sensorEvent.timestamp);
+        if(sensorEvent.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+            m_collectorOwner.Amass(sensorEvent.values[0], sensorEvent.values[1],
+                    sensorEvent.values[2], sensorEvent.timestamp);
+        }
     }
 
     @Override

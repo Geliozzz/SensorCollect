@@ -34,7 +34,7 @@ public class StorageOutput
         {
            // String secStore = System.getenv("SECONDARY_STORAGE");
            // File file = new File(secStore);
-       //     File file = new File(m_path, GenerateNewFileName(m_prefix));
+
             String state = Environment.getExternalStorageState();
             if (Environment.MEDIA_MOUNTED.equals(state)) {
                 m_ownerTestExecutor.setText("mounted");
@@ -42,15 +42,8 @@ public class StorageOutput
             {
                 m_ownerTestExecutor.setText("unmounted");
             }
-            //File file = new File(m_path, GenerateNewFileName(m_prefix));
-            //File file = new File(Environment.getExternalStorageDirectory(), GenerateNewFileName(m_prefix));
-            File file = new File(Environment.getExternalStoragePublicDirectory(
-                    Environment.DIRECTORY_PICTURES), "314");
-            if(!file.exists())
-            {
-                file.mkdir();
-                m_ownerTestExecutor.setText("created");
-            }
+            m_path = Environment.getExternalStorageDirectory().getPath() + DIRECTORY_NAME;
+            File file = new File(m_path, GenerateNewFileName(m_prefix));
             m_bufferedWriter = new BufferedWriter(new FileWriter(file));
             String header = "XAxis YAxis ZAxis Time";
             m_bufferedWriter.write(header);
@@ -68,7 +61,7 @@ public class StorageOutput
                 Log.d(STORAGE_OUTPUT_TAG, "Index is out of range");
             }
             m_bufferedWriter.close();
-            m_ownerTestExecutor.setText("closed");
+            m_ownerTestExecutor.setText("OK");
         } catch (IOException e)
         {
             e.printStackTrace();

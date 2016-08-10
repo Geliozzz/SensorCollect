@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         tvSensorList = (TextView) findViewById(R.id.tvSensorList);
         btnStartAmass = (Button) findViewById(R.id.btnStartAmass);
         pbCollectedMsr = (ProgressBar) findViewById(R.id.pbCollectedMsr);
+        pbCollectedMsr.setMax(WorkMath.NumberOfMeasurements);
 
         mSensorManager = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
         List<Sensor> deviceSensors = mSensorManager.getSensorList(Sensor.TYPE_ALL);
